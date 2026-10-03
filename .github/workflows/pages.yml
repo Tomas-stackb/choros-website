@@ -1,0 +1,47 @@
+# Deploys a design-review preview to GitHub Pages.
+# Source files stay root-relative (production-ready for choros.io); paths are
+# rewritten for the Pages sub-path and every page is marked noindex at build time.
+name: Deploy preview to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build preview
+        env:
+          BASE: ${{ steps.pages.outputs.base_path }}
+        run: |
+          rsync -a --exclude '.git' --exclude '.github' --exclude '.gitignore' --exclude 'README.md' ./ _site/
+          find _site -name '*.html' -exec sed -i -E \
+            -e "s#(href|src)=\"/([^/\"]|\")#\1=\"${BASE}/\2#g" \
+            -e 's#<head>#<head>\n  <meta name="robots" content="noindex, nofollow">#' {} +
+          printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
