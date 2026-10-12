@@ -8,39 +8,39 @@
   <link rel="canonical" href="https://choros.io/marketing/home-services-trades/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Choros">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Marketing for Home Services &amp; Trades | Choros">
   <meta property="og:description" content="Google Ads, local SEO, review systems and instant lead follow-up for home services and trade businesses across the UK.">
   <meta property="og:url" content="https://choros.io/marketing/home-services-trades/">
   <meta property="og:image" content="https://choros.io/assets/og/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/main.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Choros",
-    "legalName": "CHOROS.IO LIMITED",
-    "url": "https://choros.io/",
-    "logo": "https://choros.io/assets/og/og.png",
-    "email": "team@choros.io",
-    "telephone": "+447494913569",
-    "foundingDate": "2024-10-13",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Parc Dewi Sant, Building 1, Job's Well Road",
-      "addressLocality": "Carmarthen",
-      "addressRegion": "Wales",
-      "postalCode": "SA31 3HB",
-      "addressCountry": "GB"
-    },
-    "identifier": { "@type": "PropertyValue", "propertyID": "UK Company Number", "value": "16014661" },
-    "sameAs": [
-      "https://www.linkedin.com/company/choros-io",
-      "https://find-and-update.company-information.service.gov.uk/company/16014661"
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://choros.io/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Marketing",
+        "item": "https://choros.io/marketing/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Home Services & Trades",
+        "item": "https://choros.io/marketing/home-services-trades/"
+      }
     ]
   }
   </script>
@@ -177,21 +177,21 @@
           <p>Bespoke software, AI implementation and marketing for established UK businesses. Built in Carmarthen, working UK-wide.</p>
         </div>
         <div class="footer-col">
-          <h4>Services</h4>
+          <p class="footer-heading">Services</p>
           <a href="/ai-implementation/">AI Implementation</a>
           <a href="/ai-implementation/#audit">The AI Operations Audit</a>
           <a href="/software-development/">Software Development</a>
           <a href="/marketing/">Marketing</a>
         </div>
         <div class="footer-col">
-          <h4>Work</h4>
+          <p class="footer-heading">Work</p>
           <a href="/work/hedgepoint/">HedgePoint</a>
           <a href="/work/curveball/">Curveball</a>
           <a href="/work/altitude-28/">Altitude 28</a>
           <a href="/work/">All case studies</a>
         </div>
         <div class="footer-col">
-          <h4>Company</h4>
+          <p class="footer-heading">Company</p>
           <a href="/about/">About</a>
           <a href="/insights/">Insights</a>
           <a href="/solutions/">Solutions</a>
@@ -208,7 +208,7 @@
     </div>
   </footer>
 
-  <div class="mobile-cta"><a class="btn btn--primary" href="/contact/">Book a call</a></div>
+  <div class="mobile-cta" role="region" aria-label="Book a call"><a class="btn btn--primary" href="/contact/">Book a call</a></div>
   <script src="/assets/js/main.js" defer></script>
 </body>
 </html>

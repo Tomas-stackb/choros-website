@@ -1,4 +1,4 @@
-# Deploys a design-review preview to GitHub Pages.
+# Deploys a design-review preview to GitHub Pages (noindex; choros.io is not affected).
 # Source files stay root-relative (production-ready for choros.io); paths are
 # rewritten for the Pages sub-path and every page is marked noindex at build time.
 name: Deploy preview to GitHub Pages
@@ -33,11 +33,14 @@ jobs:
         env:
           BASE: ${{ steps.pages.outputs.base_path }}
         run: |
-          rsync -a --exclude '.git' --exclude '.github' --exclude '.gitignore' --exclude 'README.md' ./ _site/
+          rsync -a --exclude '.git' --exclude '.github' --exclude '.gitignore' --exclude 'README.md' --exclude 'scripts' ./ _site/
           find _site -name '*.html' -exec sed -i -E \
             -e "s#(href|src)=\"/([^/\"]|\")#\1=\"${BASE}/\2#g" \
             -e 's#<head>#<head>\n  <meta name="robots" content="noindex, nofollow">#' {} +
           printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+          # minify at deploy time; source files stay readable
+          npx --yes esbuild@0.25 _site/assets/css/main.css --minify --allow-overwrite --outfile=_site/assets/css/main.css
+          npx --yes esbuild@0.25 _site/assets/js/main.js --minify --allow-overwrite --outfile=_site/assets/js/main.js
 
       - uses: actions/upload-pages-artifact@v3
         with:

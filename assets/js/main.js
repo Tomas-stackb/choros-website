@@ -1,4 +1,4 @@
-/* Choros — site behaviour: nav, dropdown, reveal. No dependencies. */
+/* Choros — site behaviour: nav, dropdown, reveal, booking embed. No dependencies. */
 (function () {
   var docEl = document.documentElement;
   docEl.classList.add('js');
@@ -76,6 +76,39 @@
     kids.forEach(function (kid, i) {
       kid.style.setProperty('--d', (i * 90) + 'ms');
     });
+  });
+
+  /* Booking calendar: the third-party embed loads when asked for, not on page load */
+  document.querySelectorAll('[data-booking]').forEach(function (box) {
+    var btn = box.querySelector('[data-booking-load]');
+    if (!btn) return;
+    var warmed = false;
+    function warm() {
+      if (warmed) return;
+      warmed = true;
+      var l = document.createElement('link');
+      l.rel = 'preconnect';
+      l.href = new URL(box.getAttribute('data-booking-src')).origin;
+      document.head.appendChild(l);
+    }
+    function load() {
+      var f = document.createElement('iframe');
+      f.src = box.getAttribute('data-booking-src');
+      f.id = box.getAttribute('data-booking-id');
+      f.title = 'Book a call with Choros';
+      f.setAttribute('allow', 'payment');
+      f.setAttribute('scrolling', 'no');
+      f.style.cssText = 'width:100%;border:none;overflow:hidden';
+      box.replaceWith(f);
+      var s = document.createElement('script');
+      s.src = 'https://link.msgsndr.com/js/form_embed.js';
+      s.async = true;
+      document.body.appendChild(s);
+    }
+    ['pointerenter', 'focus', 'touchstart'].forEach(function (ev) {
+      btn.addEventListener(ev, warm, { once: true, passive: true });
+    });
+    btn.addEventListener('click', load, { once: true });
   });
 
   /* Footer year */
