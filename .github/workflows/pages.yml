@@ -26,6 +26,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Guard - published pages must not contain HTML comments
+        run: |
+          # Comments can leak internal notes. List file names only (never print the comment text).
+          if grep -rIl --include='*.html' -e '<!--' . ; then
+            echo '::error::HTML comments found in the files listed above. Remove them before publishing.'
+            exit 1
+          fi
+
       - id: pages
         uses: actions/configure-pages@v5
 
@@ -38,6 +46,12 @@ jobs:
             -e "s#(href|src)=\"/([^/\"]|\")#\1=\"${BASE}/\2#g" \
             -e 's#<head>#<head>\n  <meta name="robots" content="noindex, nofollow">#' {} +
           printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+          python3 - <<'PY'
+          import pathlib, re
+          for p in pathlib.Path('_site').rglob('*.html'):
+              t = p.read_text(encoding='utf-8'); n = re.sub(r'<!--.*?-->', '', t, flags=re.S)
+              if n != t: p.write_text(n, encoding='utf-8')
+          PY
           # minify at deploy time; source files stay readable
           npx --yes esbuild@0.25 _site/assets/css/main.css --minify --allow-overwrite --outfile=_site/assets/css/main.css
           npx --yes esbuild@0.25 _site/assets/js/main.js --minify --allow-overwrite --outfile=_site/assets/js/main.js
