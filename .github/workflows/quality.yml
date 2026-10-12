@@ -95,13 +95,22 @@ jobs:
           python3 scripts/ci/serve.py _site 4321 &
           for i in $(seq 1 20); do curl -sf http://localhost:4321/ >/dev/null && break; sleep 0.5; done
       - name: Lighthouse 13.5 CLI, mobile, key pages
+        # Runner Chrome occasionally fails to record the trace (NO_NAVSTART) on a cold start. That is a runner flake,
+        # not a page fault: tame /dev/shm + GPU, and retry each page up to 3 times before failing the job.
         run: |
           mkdir -p lh
+          npm install --no-save --no-audit --no-fund lighthouse@13.5.0
           for p in / /ai-implementation/ /software-development/ /marketing/ /work/hedgepoint/ /solutions/instant-website-builder/ /contact/; do
             n=$(echo "$p" | sed -E 's#^/$#home#; s#/#_#g')
-            npx --yes lighthouse@13.5.0 "http://localhost:4321$p" \
-              --only-categories=performance,accessibility,best-practices,seo,agentic-browsing \
-              --chrome-flags="--headless=new --no-sandbox" --output=json --output-path="lh/$n.json" --quiet
+            ok=0
+            for attempt in 1 2 3; do
+              if timeout 120 npx lighthouse "http://localhost:4321$p" \
+                --only-categories=performance,accessibility,best-practices,seo,agentic-browsing \
+                --chrome-flags="--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage" \
+                --output=json --output-path="lh/$n.json" --quiet; then ok=1; break; fi
+              echo "::warning::Lighthouse attempt $attempt failed for $p, retrying"
+            done
+            [ "$ok" = 1 ] || { echo "::error::Lighthouse failed 3 times for $p"; exit 1; }
           done
       - name: Assert budgets (perf >=95, a11y/BP/SEO = 100, LCP <=2.5s, CLS <=0.05, TBT <=200ms, agentic audits pass)
         run: node scripts/ci/lh-assert.cjs lh/*.json
