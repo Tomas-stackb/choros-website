@@ -100,6 +100,11 @@ jobs:
         run: |
           mkdir -p lh
           npm install --no-save --no-audit --no-fund lighthouse@13.5.0
+          # Throwaway warm-up: the very first Chrome launch on a fresh runner pays one-off costs (font config scan,
+          # disk cache) that inflated the first page's main-thread time (home: TBT 345 ms vs 0 ms for every page after it).
+          timeout 120 npx lighthouse "http://localhost:4321/" --only-categories=performance \
+            --chrome-flags="--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage" \
+            --output=json --output-path=/dev/null --quiet || echo "::notice::warm-up run did not complete (ignored)"
           for p in / /ai-implementation/ /software-development/ /marketing/ /work/hedgepoint/ /solutions/instant-website-builder/ /contact/; do
             n=$(echo "$p" | sed -E 's#^/$#home#; s#/#_#g')
             ok=0

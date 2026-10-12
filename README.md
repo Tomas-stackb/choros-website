@@ -32,7 +32,7 @@ Styles `assets/css/main.css` · behaviour `assets/js/main.js` · self-hosted fon
 2. **Only facts that are on the site.** Figures, client details, prices and credentials come from the owner; anything unverified is marked in the analysis report, not written as true.
 3. **`<main>` is hand-written; the chrome is generated.** Never hand-edit the header, footer or sticky bar — change `scripts/sync-chrome.py`.
 4. **Ember (orange) means an action, or "what Choros delivered".** Nothing decorative.
-5. Keep `main.css` under 40 KB and `main.js` under 6 KB (CI budgets).
+5. Keep the minified production `main.css` under 40 KB and `main.js` under 6 KB (CI budgets; the source files are larger because the build minifies them).
 
 ## Before go-live
 
