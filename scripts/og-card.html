@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Social card template (rendered by scripts/make-og.cjs, never deployed)</title>
+<style>
+  @font-face { font-family: "Newsreader"; src: url("../assets/fonts/newsreader-var.woff2") format("woff2"); font-weight: 400 600; }
+  @font-face { font-family: "Inter"; src: url("../assets/fonts/inter-var.woff2") format("woff2"); font-weight: 400 600; }
+  * { margin: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #0d0f13; color: #f2f1ed; font-family: Inter, sans-serif; }
+  .wrap { height: 100%; padding: 60px 72px 56px; display: flex; flex-direction: column; justify-content: space-between; }
+  .logo { font-family: Newsreader, Georgia, serif; font-weight: 600; font-size: 40px; letter-spacing: -0.01em; color: #fff; }
+  .logo i { display: inline-block; width: 11px; height: 11px; background: #d1470e; border-radius: 3px; margin-left: 8px; transform: translateY(-24px); }
+  .eyebrow { font-weight: 600; font-size: 19px; letter-spacing: .1em; text-transform: uppercase; color: #ff8352; margin-bottom: 22px; }
+  h1 { font-family: Newsreader, Georgia, serif; font-weight: 500; line-height: 1.07; letter-spacing: -0.018em; color: #fff; max-width: 21ch; text-wrap: balance; }
+  .foot { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.14); padding-top: 26px; }
+  .tag { font-weight: 600; font-size: 18px; letter-spacing: .1em; text-transform: uppercase; color: #a7abb3; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">Choros<i></i></div>
+    <div>
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 id="title"></h1>
+    </div>
+    <div class="foot"><div class="tag" id="left"></div><div class="tag" id="right"></div></div>
+  </div>
+  <script>
+    var q = new URLSearchParams(location.search);
+    document.getElementById('eyebrow').textContent = q.get('eyebrow') || '';
+    var h = document.getElementById('title'); h.textContent = q.get('title') || '';
+    document.getElementById('left').textContent = q.get('left') || '';
+    document.getElementById('right').textContent = q.get('right') || '';
+    var n = h.textContent.length;
+    h.style.fontSize = (n <= 52 ? 78 : n <= 72 ? 68 : n <= 95 ? 58 : 50) + 'px';
+  </script>
+</body>
+</html>

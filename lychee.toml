@@ -1,0 +1,16 @@
+# lychee.toml — link checking for the built site served at http://localhost:4321 (CI) .
+no_progress = true
+include_fragments = "anchor-only"
+max_concurrency = 4
+timeout = 20
+max_retries = 2
+user_agent = "Mozilla/5.0 (compatible; lychee-ci)"
+accept = ["200..=299", "403", "429"]
+# <link rel=canonical>, og:url, og:image and JSON-LD all point at https://choros.io (not live yet): check them against the local build.
+remap = ['https://choros\.io/ http://localhost:4321/']
+exclude = [
+  'localhost:4321/(login|blog/)',                       # served by the other app on choros.io today; verify against production separately
+  'linkedin\.com',                                      # returns 999 to bots
+  'company-information\.service\.gov\.uk',              # gov service rate-limits/blocks lychee (200 to a browser UA)
+  'fonts\.(googleapis|gstatic)\.com',
+]

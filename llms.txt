@@ -1,28 +1,29 @@
 # Choros
 
-> We build the software and AI systems established UK businesses run on. Platforms delivered in months, not years. See our work.
+> Choros (CHOROS.IO LIMITED, company no. 16014661) is a software, AI-implementation and marketing company in Carmarthen, Wales, working with established UK businesses. Fixed scope, fixed price; the client owns the code. The AI Operations Audit is from £4,950, delivered in two weeks. Contact: team@choros.io, 07494 913569.
 
 ## Services
-- [AI Implementation](https://choros.io/ai-implementation/): We audit where AI genuinely removes cost from your business, then build what the numbers justify. Fixed-price audit, two weeks.
-- [Software Development](https://choros.io/software-development/): Custom platforms and internal tools for UK businesses. Fixed scope, fixed price, you own the code.
-- [Marketing](https://choros.io/marketing/): Google Ads, Meta Ads, local SEO and the automation behind them, for showrooms, trades and hospitality across the UK.
+- [AI Implementation](https://choros.io/ai-implementation/): A fixed-price AI Operations Audit, from £4,950 and delivered in two weeks, shows where AI and automation would pay for themselves. Then we build what pays.
+- [The AI Operations Audit](https://choros.io/ai-operations-audit/): A two-week, fixed-price review of where AI and automation would pay for themselves in your business, from £4,950. Fee credited if you build with us.
+- [Software Development](https://choros.io/software-development/): Bespoke platforms, internal tools and integrations for UK businesses. Fixed scope, fixed price, you own the code. Send us the quote you have been given.
+- [Marketing](https://choros.io/marketing/): Google Ads, Meta Ads, local SEO and the CRM behind them, for showrooms, trades and hospitality across the UK. From the team that runs besttrades.wales.
 
 ## Marketing sectors
-- [Home Services & Trades](https://choros.io/marketing/home-services-trades/): Google Ads, local SEO, review systems and instant lead follow-up for home services and trade businesses across the UK. Jobs booked, not clicks counted.
-- [Kitchen & Bathroom Showrooms](https://choros.io/marketing/kitchen-bathroom-showrooms/): Google Ads, Meta Ads, local SEO and automated follow-up that turn local searches into booked design consultations. For kitchen and bathroom showrooms across the UK.
-- [Restaurants & Hospitality](https://choros.io/marketing/restaurants-hospitality/): Covers on quiet nights, bookings instead of likes. Google, Meta, local SEO and automated follow-up for restaurants and hospitality businesses across the UK.
+- [Kitchen & Bathroom Showrooms](https://choros.io/marketing/kitchen-bathroom-showrooms/): Google Ads, Meta Ads, local SEO and instant follow-up that turn local searches into booked design consultations for UK kitchen and bathroom showrooms.
+- [Home Services & Trades](https://choros.io/marketing/home-services-trades/): Google Ads, local SEO, review generation and instant enquiry follow-up for UK trade businesses, from the team that built besttrades.wales.
+- [Restaurants & Hospitality](https://choros.io/marketing/restaurants-hospitality/): Covers on quiet nights, bookings instead of likes: Google, Meta, local SEO and automated follow-up for UK restaurants, bars and hospitality venues.
 
 ## Work
-- [Work](https://choros.io/work/): Software and AI projects we built and still run, including a treasury platform quoted at £1M and delivered for a tenth of that.
-- [HedgePoint](https://choros.io/work/hedgepoint/): A £1M development quote for an FX treasury platform, delivered for a tenth of that in four months — with more features than the original scope. Built and still run by Choros.
+- [Case studies](https://choros.io/work/): Three named projects with the numbers: an FX platform built in four months, pricing automation live in three weeks, and AI vision for stock control.
+- [HedgePoint](https://choros.io/work/hedgepoint/): An FX treasury risk platform quoted at £1M and 18 months elsewhere, delivered in four months for about a tenth. Built, secured and still run by Choros.
 - [Curveball](https://choros.io/work/curveball/): Three full-time staff were repricing against Amazon, eBay and CeX by hand. Choros automated it in three weeks and all three went back to distribution.
-- [Altitude 28](https://choros.io/work/altitude-28/): Stock was going missing and nobody could say where. Choros installed AI vision cameras tied into stock management, so the answer stopped being a guess.
-
-## Products
-- [Solutions](https://choros.io/solutions/): Software products built and run by Choros, including our instant website builder.
-- [Instant Website Builder](https://choros.io/solutions/instant-website-builder/): An AI website builder for small businesses, coaches and creators. Copy, images, layout and SEO generated automatically. Free plan available.
+- [Altitude 28](https://choros.io/work/altitude-28/): Stock was going missing at a Swansea restaurant and sky bar. Choros installed AI vision cameras tied into stock management and made it visible.
 
 ## Company
-- [About](https://choros.io/about/): Choros is an AI-native software and marketing team founded in Carmarthen in 2024, working UK-wide. Meet the people behind the work.
-- [Insights](https://choros.io/insights/): Notes from delivery: AI in practice, software delivery and marketing, written by the team that ships the work.
-- [Contact](https://choros.io/contact/): Book a call with Choros, or reach us directly: team@choros.io, 07494 913569. Carmarthen, working UK-wide.
+- [About](https://choros.io/about/): Choros (CHOROS.IO LIMITED, no. 16014661) is a software, AI and marketing team founded in Carmarthen in 2024, working UK-wide. Meet the team.
+- [Choros in Wales](https://choros.io/wales/): Bespoke software, AI implementation and marketing from a Carmarthen team, with clients in Swansea and the team behind besttrades.wales.
+- [Contact](https://choros.io/contact/): Book a call with Choros, phone 07494 913569 or email team@choros.io. Based in Carmarthen, Wales, working UK-wide.
+
+## Optional
+- [Products](https://choros.io/solutions/): Software Choros builds and runs itself: the Instant Website Builder for small businesses, and besttrades.wales, Wales' independent trade directory.
+- [Instant Website Builder](https://choros.io/solutions/instant-website-builder/): An AI website builder for small businesses, coaches and creators. Copy, images, layout and SEO generated automatically. Free plan available.

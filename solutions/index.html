@@ -3,37 +3,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Our Products | Choros</title>
-  <meta name="description" content="Software products built and run by Choros, including our instant website builder.">
+  <title>Our Products: AI Website Builder &amp; besttrades.wales | Choros</title>
+  <meta name="description" content="Software Choros builds and runs itself: the Instant Website Builder for small businesses, and besttrades.wales, Wales&#x27; independent trade directory.">
   <link rel="canonical" href="https://choros.io/solutions/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Choros">
   <meta property="og:locale" content="en_GB">
-  <meta property="og:title" content="Our Products | Choros">
-  <meta property="og:description" content="Software products built and run by Choros, including our instant website builder.">
+  <meta property="og:title" content="Our Products: AI Website Builder &amp; besttrades.wales | Choros">
+  <meta property="og:description" content="Software Choros builds and runs itself: the Instant Website Builder for small businesses, and besttrades.wales, Wales&#x27; independent trade directory.">
   <meta property="og:url" content="https://choros.io/solutions/">
-  <meta property="og:image" content="https://choros.io/assets/og/og.png">
+  <meta property="og:image" content="https://choros.io/assets/og/solutions.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Choros: Products we build and run ourselves.">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="twitter:image:alt" content="Choros: Products we build and run ourselves.">
+  <meta name="theme-color" content="#0d0f13">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/img/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/main.css">
+  <noscript><style>@media (max-width: 960px) { .burger { display: none; } .nojs-menu { display: inline-flex; } }</style></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
+    "@graph": [
       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://choros.io/"
+        "@type": "WebPage",
+        "@id": "https://choros.io/solutions/#webpage",
+        "url": "https://choros.io/solutions/",
+        "name": "Our Products: AI Website Builder & besttrades.wales | Choros",
+        "description": "Software Choros builds and runs itself: the Instant Website Builder for small businesses, and besttrades.wales, Wales' independent trade directory.",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://choros.io/#website"
+        },
+        "breadcrumb": {
+          "@id": "https://choros.io/solutions/#breadcrumb"
+        }
       },
       {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Solutions",
-        "item": "https://choros.io/solutions/"
+        "@type": "BreadcrumbList",
+        "@id": "https://choros.io/solutions/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://choros.io/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Products",
+            "item": "https://choros.io/solutions/"
+          }
+        ]
       }
     ]
   }
@@ -43,42 +72,44 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="container container--wide">
+    <div class="container">
       <a class="logo" href="/" aria-label="Choros home">Choros<span class="logo-dot" aria-hidden="true"></span></a>
       <nav class="nav-desktop" aria-label="Primary">
         <a href="/work/">Work</a>
         <a href="/ai-implementation/">AI Implementation</a>
         <a href="/software-development/">Software</a>
-        <a href="/marketing/">Marketing</a>
         <div class="nav-drop">
-          <button type="button" aria-expanded="false" aria-haspopup="true">Solutions
-            <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
-          </button>
-          <div class="nav-drop-panel">
-            <a href="/solutions/">Our products<span>What we build and run ourselves</span></a>
-            <a href="/solutions/instant-website-builder/">Instant Website Builder<span>Websites for small businesses</span></a>
-            <a href="https://besttrades.wales" rel="noopener">besttrades.wales &#8599;<span>Wales&rsquo; independent trade directory</span></a>
+          <a href="/marketing/">Marketing</a>
+          <button type="button" class="nav-drop-toggle" aria-expanded="false" aria-controls="nav-marketing"><span class="sr-only">Marketing sectors</span><svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <div class="nav-drop-panel" id="nav-marketing">
+            <a href="/marketing/kitchen-bathroom-showrooms/">Kitchen &amp; bathroom showrooms<span>Booked design consultations</span></a>
+            <a href="/marketing/home-services-trades/">Home services &amp; trades<span>Jobs booked, not clicks counted</span></a>
+            <a href="/marketing/restaurants-hospitality/">Restaurants &amp; hospitality<span>Covers on quiet nights</span></a>
+            <a href="/marketing/">All marketing<span>Ads, follow-up and tracking</span></a>
           </div>
         </div>
+        <a href="/solutions/" aria-current="page">Products</a>
         <a href="/about/">About</a>
       </nav>
       <div class="header-cta">
         <a class="btn btn--primary btn--sm" href="/contact/">Book a call</a>
-        <button class="burger" type="button" aria-expanded="false" aria-label="Menu"><span></span><span></span><span></span></button>
+        <a class="nojs-menu" href="#site-footer">Menu</a>
+        <button class="burger" type="button" aria-expanded="false" aria-controls="nav-mobile" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
 
-  <nav class="nav-mobile" aria-label="Mobile">
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
     <a class="nm-link" href="/work/">Work</a>
     <a class="nm-link" href="/ai-implementation/">AI Implementation</a>
     <a class="nm-link" href="/software-development/">Software</a>
     <a class="nm-link" href="/marketing/">Marketing</a>
-    <a class="nm-link" href="/solutions/" aria-current="page">Solutions</a>
-    <a class="nm-sub" href="/solutions/instant-website-builder/">Instant Website Builder</a>
-    <a class="nm-sub" href="https://besttrades.wales" rel="noopener">besttrades.wales &#8599;</a>
+    <a class="nm-sub" href="/marketing/kitchen-bathroom-showrooms/">Kitchen &amp; bathroom showrooms</a>
+    <a class="nm-sub" href="/marketing/home-services-trades/">Home services &amp; trades</a>
+    <a class="nm-sub" href="/marketing/restaurants-hospitality/">Restaurants &amp; hospitality</a>
+    <a class="nm-link" href="/solutions/" aria-current="page">Products</a>
     <a class="nm-link" href="/about/">About</a>
-    <a class="nm-link" href="/contact/">Book a call</a>
+    <a class="btn btn--primary nm-cta" href="/contact/">Book a call</a>
     <div class="nm-meta">
       <a href="mailto:team@choros.io">team@choros.io</a><br>
       <a href="tel:+447494913569">07494 913569</a>
@@ -87,67 +118,74 @@
 
   <main id="main">
 
-    <section class="page-hero">
+    <section class="page-hero page-hero--compact">
       <div class="container">
         <div class="page-hero-inner">
-          <span class="eyebrow eyebrow--accent">Products</span>
-          <h1 class="h-display">Solutions</h1>
-          <p class="standfirst">Alongside our client work, we build and run our own products. Nothing keeps an engineering team honest like operating what it ships.</p>
+          <h1 class="h-display">Products we build and run ourselves.</h1>
+          <p class="standfirst">Alongside client work we run two products of our own: an AI website builder for small businesses, and besttrades.wales, a directory of Welsh trades. Running them means we live with our own engineering decisions every day.</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <div class="section">
       <div class="container">
-        <div class="cards-2" data-stagger>
+        <div class="cards-2">
 
-          <article class="case-card reveal">
-            <span class="where">SaaS &mdash; websites for small business</span>
+          <article class="case-card">
+            <span class="where">SaaS · websites for small business</span>
             <h2>Instant Website Builder</h2>
             <p>An AI website builder for small business owners, coaches and creators: copy, images, layout and SEO generated automatically, with a free plan to start. Built for people who need a professional site without hiring anyone.</p>
-            <a class="link-arrow" href="/solutions/instant-website-builder/">Explore the builder <span class="ar">&rarr;</span></a>
+            <a class="link-arrow" href="/solutions/instant-website-builder/">Explore the Instant Website Builder <span class="ar" aria-hidden="true">&rarr;</span></a>
           </article>
 
-          <article class="case-card reveal">
-            <span class="where">Directory &mdash; Wales</span>
+          <article class="case-card">
+            <span class="where">Directory · Wales</span>
             <h2>besttrades.wales</h2>
-            <p>Wales&rsquo; independent trade directory. 1,900+ verified businesses across 60 towns and 30 trade categories, every listing checked against Companies House and official trade-body registers rather than self-reported claims. Free for homeowners, free for tradespeople to claim a listing.</p>
-            <a class="link-arrow" href="https://besttrades.wales" rel="noopener">Visit besttrades.wales <span class="ar">&rarr;</span></a>
+            <p>Wales’ independent trade directory: 3,600+ businesses across 69 Welsh towns and 65 trade categories (October 2026), sourced from public records and cross-checked against Companies House, Google Business Profile or both. Free for homeowners, free for tradespeople to claim a listing.</p>
+            <a class="link-arrow" href="https://besttrades.wales" rel="noopener">Visit besttrades.wales <span class="ar" aria-hidden="true">&rarr;</span></a>
           </article>
 
         </div>
 
-        <div class="callout mt-3 reveal">
-          <p><strong>Why this matters if you are a consultancy client:</strong> the products fund and prove the same engineering that builds your systems. We run production software with real users at our own risk, every day.</p>
+        <div class="note-rule mt-3">
+          <p><strong>If you are a client, the same team builds your systems.</strong> We run production software with real users at our own risk, every day.</p>
         </div>
       </div>
-    </section>
+    </div>
 
     <section class="cta-band section">
       <div class="container center">
-        <h2 class="h-xl reveal">Want something built for your business?</h2>
-        <p class="reveal">The products above are what we make for everyone. The interesting work is what we build for one company at a time.</p>
-        <div class="cta-row reveal">
-          <a class="btn btn--white" href="/contact/">Book a call</a>
+        <h2 class="h-xl">Want something built for your business?</h2>
+        <p>We build bespoke platforms, internal tools and AI systems for one company at a time.</p>
+        <div class="cta-row">
+          <a class="btn btn--white" href="/contact/?topic=software#book">Book a call</a>
         </div>
+        <p class="cta-note">Not ready for a call? Email <a href="mailto:team@choros.io">team@choros.io</a> with a few lines about what you want to fix.</p>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <a class="logo" href="/" aria-label="Choros home">Choros<span class="logo-dot" aria-hidden="true"></span></a>
-          <p>Bespoke software, AI implementation and marketing for established UK businesses. Built in Carmarthen, working UK-wide.</p>
+          <p>Bespoke software, AI implementation and marketing for established UK businesses. Based in Carmarthen, working UK-wide.</p>
         </div>
         <div class="footer-col">
           <p class="footer-heading">Services</p>
           <a href="/ai-implementation/">AI Implementation</a>
-          <a href="/ai-implementation/#audit">The AI Operations Audit</a>
+          <a href="/ai-operations-audit/">The AI Operations Audit</a>
           <a href="/software-development/">Software Development</a>
           <a href="/marketing/">Marketing</a>
+          <a href="/wales/">Choros in Wales</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Marketing for</p>
+          <a href="/marketing/kitchen-bathroom-showrooms/">Kitchen &amp; bathroom showrooms</a>
+          <a href="/marketing/home-services-trades/">Home services &amp; trades</a>
+          <a href="/marketing/restaurants-hospitality/">Restaurants &amp; hospitality</a>
         </div>
         <div class="footer-col">
           <p class="footer-heading">Work</p>
@@ -159,8 +197,7 @@
         <div class="footer-col">
           <p class="footer-heading">Company</p>
           <a href="/about/">About</a>
-          <a href="/insights/">Insights</a>
-          <a href="/solutions/">Solutions</a>
+          <a href="/solutions/">Products</a>
           <a href="/contact/">Contact</a>
           <a href="mailto:team@choros.io">team@choros.io</a>
           <a href="tel:+447494913569">07494 913569</a>
@@ -168,13 +205,13 @@
         </div>
       </div>
       <div class="footer-legal">
-        CHOROS.IO LIMITED &middot; Company no. <a href="https://find-and-update.company-information.service.gov.uk/company/16014661" rel="noopener">16014661</a> &middot; Registered office: Parc Dewi Sant, Building 1, Job&rsquo;s Well Road, Carmarthen, Wales, SA31 3HB<br>
-        &copy; <span data-year>2026</span> Choros.io Limited. All rights reserved.
+        CHOROS.IO LIMITED &middot; Registered in England and Wales &middot; Company no. <a href="https://find-and-update.company-information.service.gov.uk/company/16014661" rel="noopener">16014661</a> &middot; Registered office: Parc Dewi Sant, Building 1, Job&rsquo;s Well Road, Carmarthen, Wales, SA31 3HB<br>
+        &copy; <span data-year>2026</span> Choros.io Limited. All rights reserved. &middot; <a href="/privacy/">Privacy notice</a>
       </div>
     </div>
   </footer>
 
-  <div class="mobile-cta" role="region" aria-label="Book a call"><a class="btn btn--primary" href="/contact/">Book a call</a></div>
+  <div class="mobile-cta" role="region" aria-label="Quick actions"><a class="btn btn--primary" href="/contact/#book">Book a call</a></div>
   <script src="/assets/js/main.js" defer></script>
 </body>
 </html>

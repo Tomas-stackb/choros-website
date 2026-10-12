@@ -1,19 +1,33 @@
-# Used by Netlify and Cloudflare Pages (ignored by GitHub Pages).
+# Netlify + Cloudflare Pages (GitHub Pages ignores this file). Redirects run before headers.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(self "https://api.leadconnectorhq.com")
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://link.msgsndr.com; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; frame-src https://api.leadconnectorhq.com; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Cross-Origin-Opener-Policy: same-origin
+  # HSTS: raise in stages (300 -> 86400 -> 2592000 -> 31536000). Do NOT add includeSubDomains or preload while *.choros.io tenant sites exist.
+  Strict-Transport-Security: max-age=300
 
-# Fonts and images do not change under the same filename: cache for a year.
+# Safe to cache for a year ONLY because scripts/ci/stamp-assets.py adds ?v=<hash> to every css/js reference and fonts are renamed if they ever change.
 /assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/js/*
   Cache-Control: public, max-age=31536000, immutable
 /assets/og/*
   Cache-Control: public, max-age=604800
+/assets/img/*
+  Cache-Control: public, max-age=604800
+/favicon.ico
+  Cache-Control: public, max-age=86400
 /favicon.svg
   Cache-Control: public, max-age=86400
-
-# CSS/JS filenames are not hashed, so keep them revalidating.
-/assets/css/*
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
-/assets/js/*
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/apple-touch-icon.png
+  Cache-Control: public, max-age=86400
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600
+/llms.txt
+  Cache-Control: public, max-age=3600

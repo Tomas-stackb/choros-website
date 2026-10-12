@@ -1,0 +1,143 @@
+# .github/workflows/quality.yml
+# Fails a push/PR on: preview-vs-production mistakes, leaked notes/denylisted names, SEO + JSON-LD + sitemap drift,
+# broken links, Lighthouse score/CWV regressions, accessibility violations.
+# No Lighthouse CI server/app: plain `lighthouse@13` CLI + a 40-line assertion script. No paid services.
+name: Quality gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 6 * * 1'          # Mondays 06:17 UTC: external-link rot check (see job `external-links`)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-check:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Guard - HTML comments must not exist in the source (they can leak internal notes)
+        run: |
+          if grep -rIl --include='*.html' -e '<!--' . ; then
+            echo '::error::HTML comments found in the files listed above. Remove them (file names only are printed on purpose).'
+            exit 1
+          fi
+      - name: Build PRODUCTION artifact
+        run: bash scripts/build-site.sh production
+
+      - name: Static checks (production guard, head tags, JSON-LD, sitemap, links, leaks)
+        env:
+          PUBLISH_DENYLIST: ${{ secrets.PUBLISH_DENYLIST }}   # comma-separated names that must never ship; a SECRET, not a repo file
+        run: python3 scripts/ci/check-site.py _site --mode production
+
+      - name: Prove the guard rejects a preview build (so it can never reach choros.io unnoticed)
+        run: |
+          OUT=_site-preview bash scripts/build-site.sh preview /choros-website
+          python3 scripts/ci/check-site.py _site-preview --mode preview --base /choros-website --safety-only
+          if python3 scripts/ci/check-site.py _site-preview --mode production --safety-only >/dev/null; then
+            echo "::error::a PREVIEW artifact passed the PRODUCTION guard"; exit 1
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 7
+
+  links:
+    needs: build-and-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: site, path: _site }
+      - name: Serve like production
+        run: |
+          python3 scripts/ci/serve.py _site 4321 &
+          for i in $(seq 1 20); do curl -sf http://localhost:4321/ >/dev/null && break; sleep 0.5; done
+      - name: Page URL list from the sitemap
+        run: |
+          grep -o '<loc>[^<]*</loc>' _site/sitemap.xml | sed -E 's#</?loc>##g; s#^https://choros\.io#http://localhost:4321#' > urls.txt
+          echo http://localhost:4321/404.html >> urls.txt
+      - name: lychee (internal links + #fragments, external links) - options live in lychee.toml
+        uses: lycheeverse/lychee-action@v2        # pin to a full commit SHA once you have chosen the version (Dependabot can bump it)
+        with:
+          lycheeVersion: v0.24.2                  # the version this config was tested with
+          fail: true
+          args: --config lychee.toml --files-from urls.txt
+
+  lighthouse:
+    needs: build-and-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CHROME_PATH: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: site, path: _site }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Serve like production (gzip + the repo's own _headers)
+        run: |
+          python3 scripts/ci/serve.py _site 4321 &
+          for i in $(seq 1 20); do curl -sf http://localhost:4321/ >/dev/null && break; sleep 0.5; done
+      - name: Lighthouse 13.5 CLI, mobile, key pages
+        run: |
+          mkdir -p lh
+          for p in / /ai-implementation/ /software-development/ /marketing/ /work/hedgepoint/ /solutions/instant-website-builder/ /contact/; do
+            n=$(echo "$p" | sed -E 's#^/$#home#; s#/#_#g')
+            npx --yes lighthouse@13.5.0 "http://localhost:4321$p" \
+              --only-categories=performance,accessibility,best-practices,seo,agentic-browsing \
+              --chrome-flags="--headless=new --no-sandbox" --output=json --output-path="lh/$n.json" --quiet
+          done
+      - name: Assert budgets (perf >=95, a11y/BP/SEO = 100, LCP <=2.5s, CLS <=0.05, TBT <=200ms, agentic audits pass)
+        run: node scripts/ci/lh-assert.cjs lh/*.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: lighthouse-json, path: lh, retention-days: 14 }
+
+  a11y:
+    needs: build-and-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: site, path: _site }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Install Playwright + axe (pinned, not saved to the repo)
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.64.0 @axe-core/playwright@4.13.0
+          npx playwright install --with-deps chromium
+      - name: Serve like production
+        run: |
+          python3 scripts/ci/serve.py _site 4321 &
+          for i in $(seq 1 20); do curl -sf http://localhost:4321/ >/dev/null && break; sleep 0.5; done
+      - name: axe, WCAG 2.2 AA + best-practice, every sitemap page + 404, at 390 and 1280
+        run: node scripts/ci/axe.cjs http://localhost:4321
+
+  external-links:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: lychee on the LIVE site (needs choros.io to be live)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: false                      # report-only: rot in third-party links should open an issue, not block pushes
+          args: --no-progress --include-fragments=anchor-only --accept 200..=299,403,429 --exclude linkedin\.com --exclude company-information\.service\.gov\.uk https://choros.io/sitemap.xml

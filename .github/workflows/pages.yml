@@ -1,6 +1,7 @@
-# Deploys a design-review preview to GitHub Pages (noindex; choros.io is not affected).
-# Source files stay root-relative (production-ready for choros.io); paths are
-# rewritten for the Pages sub-path and every page is marked noindex at build time.
+# .github/workflows/pages.yml  (replacement) — PREVIEW ONLY.
+# All preview-specific behaviour (noindex, Disallow, base path) now lives in scripts/build-site.sh preview,
+# and a guard step fails the deploy if the artifact is not noindex. Production is built by Netlify/Cloudflare Pages
+# running `bash scripts/build-site.sh production` (see netlify.toml), never by this workflow.
 name: Deploy preview to GitHub Pages
 
 on:
@@ -25,40 +26,27 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Guard - published pages must not contain HTML comments
+      - name: Guard - HTML comments must not exist in the source (they can leak internal notes)
         run: |
-          # Comments can leak internal notes. List file names only (never print the comment text).
           if grep -rIl --include='*.html' -e '<!--' . ; then
-            echo '::error::HTML comments found in the files listed above. Remove them before publishing.'
+            echo '::error::HTML comments found in the files listed above. Remove them (file names only are printed on purpose).'
             exit 1
           fi
-
       - id: pages
         uses: actions/configure-pages@v5
-
-      - name: Build preview
-        env:
-          BASE: ${{ steps.pages.outputs.base_path }}
+      - name: Build preview (noindex + Disallow + base path)
+        run: bash scripts/build-site.sh preview "${{ steps.pages.outputs.base_path }}"
+      - name: Guard - refuse to publish anything indexable from this workflow
+        run: python3 scripts/ci/check-site.py _site --mode preview --base "${{ steps.pages.outputs.base_path }}" --safety-only
+      - name: Guard - refuse to run for a custom domain (that would be production)
         run: |
-          rsync -a --exclude '.git' --exclude '.github' --exclude '.gitignore' --exclude 'README.md' --exclude 'scripts' ./ _site/
-          find _site -name '*.html' -exec sed -i -E \
-            -e "s#(href|src)=\"/([^/\"]|\")#\1=\"${BASE}/\2#g" \
-            -e 's#<head>#<head>\n  <meta name="robots" content="noindex, nofollow">#' {} +
-          printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
-          python3 - <<'PY'
-          import pathlib, re
-          for p in pathlib.Path('_site').rglob('*.html'):
-              t = p.read_text(encoding='utf-8'); n = re.sub(r'<!--.*?-->', '', t, flags=re.S)
-              if n != t: p.write_text(n, encoding='utf-8')
-          PY
-          # minify at deploy time; source files stay readable
-          npx --yes esbuild@0.25 _site/assets/css/main.css --minify --allow-overwrite --outfile=_site/assets/css/main.css
-          npx --yes esbuild@0.25 _site/assets/js/main.js --minify --allow-overwrite --outfile=_site/assets/js/main.js
-
+          if [ -f CNAME ] || [ -n "$(gh api repos/${{ github.repository }}/pages --jq '.cname // empty' 2>/dev/null)" ]; then
+            echo "::error::GitHub Pages has a custom domain; this preview workflow must not deploy to it"; exit 1
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-
       - id: deployment
         uses: actions/deploy-pages@v4
