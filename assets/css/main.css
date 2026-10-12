@@ -1104,14 +1104,13 @@ html.nav-open body { overflow: hidden; }
 }
 .embed-panel iframe { width: 100%; border: 0; min-height: 740px; }
 .booking-facade {
-  min-height: 740px;
+  min-height: 420px;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 1rem; text-align: center; padding: 2rem 1.5rem;
 }
 .booking-facade h3 { font-family: var(--serif); font-size: 1.5rem; }
 .booking-facade p { color: var(--muted); max-width: 42ch; font-size: 0.95rem; }
 .booking-facade .note { font-size: 0.8125rem; }
-@media (max-width: 600px) { .booking-facade { min-height: 420px; } }
 .link-inline { text-decoration: underline; text-underline-offset: 3px; }
 /* Links inside running text must not rely on colour alone (WCAG 1.4.1) */
 main :is(p, .d) > a:not([class]) { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
