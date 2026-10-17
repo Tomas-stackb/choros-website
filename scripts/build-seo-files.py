@@ -15,7 +15,7 @@ TODAY = datetime.date.today().isoformat()
 GROUPS = [  # llms.txt sections: (heading, [(path, link name)])
     ("Services", [("/ai-implementation/", "AI Implementation"), ("/ai-operations-audit/", "The AI Operations Audit"), ("/software-development/", "Software Development"), ("/marketing/", "Marketing")]),
     ("Marketing sectors", [("/marketing/kitchen-bathroom-showrooms/", "Kitchen & Bathroom Showrooms"), ("/marketing/home-services-trades/", "Home Services & Trades"), ("/marketing/restaurants-hospitality/", "Restaurants & Hospitality")]),
-    ("Work", [("/work/", "Case studies"), ("/work/hedgepoint/", "HedgePoint"), ("/work/curveball/", "Curveball"), ("/work/altitude-28/", "Altitude 28")]),
+    ("Work", [("/work/", "Our work"), ("/work/hedgepoint/", "HedgePoint")]),
     ("Company", [("/about/", "About"), ("/wales/", "Choros in Wales"), ("/contact/", "Contact")]),
     ("Optional", [("/solutions/", "Products"), ("/solutions/instant-website-builder/", "Instant Website Builder")]),
 ]

@@ -8,7 +8,7 @@ Fails (exit 1) on errors; prints warnings. Covers: preview-vs-production safety,
 JSON-LD sanity against Google's documented requirements, internal links + fragments, leaked internal notes,
 icon/OG file existence and size, asset stamping. Set PUBLISH_DENYLIST (comma-separated, from a CI *secret*, never
 committed) to block names that must not be published, e.g. clients without sign-off."""
-import argparse, html, json, os, pathlib, re, struct, sys, datetime
+import argparse, hashlib, html, json, os, pathlib, re, struct, sys, datetime
 
 ap = argparse.ArgumentParser()
 ap.add_argument('root'); ap.add_argument('--mode', choices=['production', 'preview'], required=True)
@@ -184,15 +184,28 @@ for path, (f, s) in pages.items():
 # ---- 6. leaked notes / denylist / hygiene ----------------------------------------------------------
 BAD = re.compile(r'(TODO|FIXME|XXX|lorem ipsum|spec §|\bsign-off\b|must NOT appear|Do NOT name)', re.I)
 deny = [x.strip().lower() for x in os.environ.get('PUBLISH_DENYLIST', '').split(',') if x.strip()]
+# Names that must not be published (owner's instruction). Stored as SHA-256 of the lower-case token sequence, so this public file
+# does not itself name them. Add one with: python3 -c "import hashlib;print(hashlib.sha256(b'client name').hexdigest())"
+BLOCKED_SHA256 = {
+    '25a2218bfac3b7eb85a298f7a297440836578c93b359b5b3ebd741e4dc062c13',
+    'ce9382984d042eb22c1c2da73ef0060f138f40ad368af20557011b24db2ac591',
+    '033d688ef0c0a10f85f47cfc6b4f7446cb40aead93a3dfded38c1c0910549063',
+}
+def blocked_name_in(text):
+    toks = re.findall(r'[a-z0-9]+', text.lower())
+    seen = set(toks) | {' '.join(p) for p in zip(toks, toks[1:])}
+    return any(hashlib.sha256(x.encode()).hexdigest() in BLOCKED_SHA256 for x in seen)
 for f in ROOT.rglob('*'):
     if not f.is_file(): continue
     rel = f.relative_to(ROOT).as_posix()
     if rel.endswith(('.map', '.bak', '.DS_Store')) or rel == 'assets/og/og-card.html': err(f'{rel}: must not be published')
+    if blocked_name_in(rel): err(f'{rel}: file name contains a blocked name (hashed list in check-site.py)')
     if f.suffix in ('.html', '.txt', '.xml', '.json', '.css', '.js', '.svg', '.webmanifest'):
         t = f.read_text(encoding='utf-8', errors='replace')
         if PROD and f.suffix == '.html' and '<!--' in t: err(f'{rel}: HTML comment present ({len(re.findall("<!--", t))}) - comments carry internal notes')
         if PROD and BAD.search(t): err(f'{rel}: internal-note marker "{BAD.search(t).group(0)}"')
         tl = t.lower()
+        if blocked_name_in(t): err(f'{rel}: contains a blocked name (hashed list in check-site.py)')
         for d in deny:
             if d in tl: err(f'{rel}: contains denylisted term (see PUBLISH_DENYLIST secret)')
 

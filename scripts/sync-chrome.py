@@ -147,9 +147,7 @@ FOOTER = f'''<footer class="site-footer" id="site-footer">
         <div class="footer-col">
           <p class="footer-heading">Work</p>
           <a href="/work/hedgepoint/">HedgePoint</a>
-          <a href="/work/curveball/">Curveball</a>
-          <a href="/work/altitude-28/">Altitude 28</a>
-          <a href="/work/">All case studies</a>
+          <a href="/work/">All work</a>
         </div>
         <div class="footer-col">
           <p class="footer-heading">Company</p>

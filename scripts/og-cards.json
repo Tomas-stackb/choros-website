@@ -71,10 +71,10 @@
   },
   {
     "file": "work",
-    "eyebrow": "Case studies",
-    "title": "Three projects, with the numbers.",
+    "eyebrow": "Our work",
+    "title": "What we have built, and still run.",
     "left": "choros.io/work",
-    "right": "HedgePoint · Curveball · Altitude 28"
+    "right": "HedgePoint · besttrades.wales · Instant Website Builder"
   },
   {
     "file": "work-hedgepoint",
@@ -82,20 +82,6 @@
     "title": "An FX risk platform quoted at £1M, built for about a tenth in four months.",
     "left": "4 months · about a tenth of the £1M quote",
     "right": "choros.io/work/hedgepoint"
-  },
-  {
-    "file": "work-curveball",
-    "eyebrow": "Case study · Retail & distribution, Swansea",
-    "title": "Repricing across Amazon, eBay and CeX, automated in three weeks.",
-    "left": "3 weeks · 3 staff · 3 marketplaces",
-    "right": "choros.io/work/curveball"
-  },
-  {
-    "file": "work-altitude-28",
-    "eyebrow": "Case study · Hospitality, Swansea",
-    "title": "Stock was disappearing. We made it visible.",
-    "left": "AI vision · stock management",
-    "right": "choros.io/work/altitude-28"
   },
   {
     "file": "about",
@@ -108,8 +94,8 @@
     "file": "wales",
     "eyebrow": "Carmarthen, Wales",
     "title": "Software, AI and marketing for Welsh businesses, from Carmarthen.",
-    "left": "Clients in Swansea",
-    "right": "besttrades.wales"
+    "left": "We run besttrades.wales",
+    "right": "choros.io/wales"
   },
   {
     "file": "contact",

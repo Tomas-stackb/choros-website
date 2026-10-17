@@ -14,14 +14,12 @@
 - [Restaurants & Hospitality](https://choros.io/marketing/restaurants-hospitality/): Covers on quiet nights, bookings instead of likes: Google, Meta, local SEO and automated follow-up for UK restaurants, bars and hospitality venues.
 
 ## Work
-- [Case studies](https://choros.io/work/): Three named projects with the numbers: an FX platform built in four months, pricing automation live in three weeks, and AI vision for stock control.
+- [Our work](https://choros.io/work/): A client platform quoted at £1M and built in four months for about a tenth, plus besttrades.wales and the Instant Website Builder, which we run ourselves.
 - [HedgePoint](https://choros.io/work/hedgepoint/): An FX treasury risk platform quoted at £1M and 18 months elsewhere, delivered in four months for about a tenth. Built, secured and still run by Choros.
-- [Curveball](https://choros.io/work/curveball/): Three full-time staff were repricing against Amazon, eBay and CeX by hand. Choros automated it in three weeks and all three went back to distribution.
-- [Altitude 28](https://choros.io/work/altitude-28/): Stock was going missing at a Swansea restaurant and sky bar. Choros installed AI vision cameras tied into stock management and made it visible.
 
 ## Company
 - [About](https://choros.io/about/): Choros (CHOROS.IO LIMITED, no. 16014661) is a software, AI and marketing team founded in Carmarthen in 2024, working UK-wide. Meet the team.
-- [Choros in Wales](https://choros.io/wales/): Bespoke software, AI implementation and marketing from a Carmarthen team, with clients in Swansea and the team behind besttrades.wales.
+- [Choros in Wales](https://choros.io/wales/): Bespoke software, AI implementation and marketing from a Carmarthen team that also runs besttrades.wales, Wales' independent trade directory.
 - [Contact](https://choros.io/contact/): Book a call with Choros, phone 07494 913569 or email team@choros.io. Based in Carmarthen, Wales, working UK-wide.
 
 ## Optional

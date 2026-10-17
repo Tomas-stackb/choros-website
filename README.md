@@ -4,7 +4,7 @@ Static HTML/CSS/JS, no framework. A concept for the restructured choros.io; **no
 
 ## Structure
 
-`index.html` (home) · `ai-implementation/` · `ai-operations-audit/` · `software-development/` · `marketing/` (+ 3 sector pages) · `solutions/` (shown as "Products"; + `instant-website-builder/`) · `work/` (+ 3 case studies) · `about/` · `wales/` · `contact/` · `insights/` and `privacy/` (both `noindex` until ready) · `404.html`.
+`index.html` (home) · `ai-implementation/` · `ai-operations-audit/` · `software-development/` · `marketing/` (+ 3 sector pages) · `solutions/` (shown as "Products"; + `instant-website-builder/`) · `work/` (+ the HedgePoint case study) · `about/` · `wales/` · `contact/` · `insights/` and `privacy/` (both `noindex` until ready) · `404.html`.
 
 Styles `assets/css/main.css` · behaviour `assets/js/main.js` · self-hosted fonts `assets/fonts/` · icons `assets/img/` + `favicon.ico` · social cards `assets/og/` (one per page).
 
@@ -33,6 +33,7 @@ Styles `assets/css/main.css` · behaviour `assets/js/main.js` · self-hosted fon
 3. **`<main>` is hand-written; the chrome is generated.** Never hand-edit the header, footer or sticky bar — change `scripts/sync-chrome.py`.
 4. **Ember (orange) means an action, or "what Choros delivered".** Nothing decorative.
 5. Keep the minified production `main.css` under 40 KB and `main.js` under 6 KB (CI budgets; the source files are larger because the build minifies them).
+6. **Names that must not be published.** Clients without permission to be named are blocked in CI by `BLOCKED_SHA256` in `scripts/ci/check-site.py` (hashed, so the public repo does not name them; text and file names are both checked). Add one with `python3 -c "import hashlib;print(hashlib.sha256(b'client name').hexdigest())"`. For names kept out of the repo entirely, use the `PUBLISH_DENYLIST` secret.
 
 ## Before go-live
 
